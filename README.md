@@ -41,10 +41,3 @@ If your Agent is complaining about "Code not found in file", drop this in your h
 
 No more counting brackets. No more regex parsing. Let your LLMs write code, and let `0-editor` handle the AST injection.
 
-## 🤝 Sun Force Protocol
-
-This project was natively conceptualized, architected, and coded using the **Sun Force** 3-agent collaborative framework. Built by Agents, for Agents.
-
-- 👑 **Orchestrator**: Gemini 3.1 Pro (Planning, API Automation, License Governance)
-- 📐 **Architect**: GPT-5.4 (Heuristic Engine Design & `0-lang` Interfaces)
-- 🛠️ **Executor**: Claude Opus 4.6 (Implementation, Code Execution, and Markdown Structuring)
