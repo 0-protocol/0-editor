@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import sys
 import os
+import ast
 
 def fuzzy_replace(file_path, old_path, new_path):
     try:
@@ -13,6 +14,12 @@ def fuzzy_replace(file_path, old_path, new_path):
 
     if old_text in content:
         new_content = content.replace(old_text, new_text, 1)
+        if file_path.endswith(".py"):
+            try:
+                ast.parse(new_content)
+            except SyntaxError as e:
+                print(f"🛑 AST Structural Guard Triggered: The proposed patch breaks Python syntax! Reverting.\n{e}", file=sys.stderr)
+                return False
         with open(file_path, 'w') as f: f.write(new_content)
         print(f"Success: Exact match replaced in {file_path}")
         return True
@@ -44,8 +51,15 @@ def fuzzy_replace(file_path, old_path, new_path):
 
     if match_start != -1:
         new_content_lines = content_lines[:match_start] + new_lines + content_lines[match_end:]
+        new_content_full = "\n".join(new_content_lines) + "\n"
+        if file_path.endswith(".py"):
+            try:
+                ast.parse(new_content_full)
+            except SyntaxError as e:
+                print(f"🛑 AST Structural Guard Triggered: The proposed fuzzy patch breaks Python syntax! Reverting.\n{e}", file=sys.stderr)
+                return False
         with open(file_path, 'w') as f:
-            f.write("\n".join(new_content_lines) + "\n")
+            f.write(new_content_full)
         print(f"Success: Fuzzy match replaced lines {match_start+1}-{match_end} in {file_path}")
         return True
 
