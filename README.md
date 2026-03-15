@@ -3,7 +3,7 @@
   <p><strong>The First File Editor Built for the Latent Space.</strong></p>
   
   <p>
-    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+    <a href="https://www.gnu.org/licenses/agpl-3.0"><img src="https://img.shields.io/badge/License-AGPL%203.0-blue.svg" alt="License: MIT"></a>
     <a href="https://github.com/0-protocol/0-lang"><img src="https://img.shields.io/badge/Language-0--lang-blue.svg" alt="Built with 0-lang"></a>
     <a href="#"><img src="https://img.shields.io/badge/Status-Agent_Native-success.svg" alt="Agent Ready"></a>
   </p>
