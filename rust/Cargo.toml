@@ -1,0 +1,8 @@
+[package]
+name = "0-editor"
+version = "1.0.0"
+edition = "2021"
+description = "A native, fuzzy-matching file editor designed specifically for AI Agents."
+authors = ["0-protocol"]
+
+[dependencies]

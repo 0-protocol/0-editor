@@ -27,17 +27,39 @@ It understands *intent*. It aligns unified diffs and approximate code blocks to 
 - **🧠 Forgive & Forget**: Hallucinated an extra newline? Used spaces instead of tabs? `0-editor` doesn't care. It finds the semantic block and patches it perfectly.
 - **⚡ Drop-in Replacement**: Plugs directly into any agentic workflow. Just give it the target file, the old hallucinated block, and the new block.
 - **🔒 100% Native**: Built natively in `0-lang` for ultimate performance, determinism, and security in decentralized agent networks.
+- **🛠️ Multi-Ecosystem**: Provides robust Python (`0_editor.py`) and Rust (`0-editor-rs`) native implementations for drop-in use anywhere.
 
 ## 🚀 Quick Start
 
 If your Agent is complaining about "Code not found in file", drop this in your harness:
 
+**For 0-lang Environments:**
 ```bash
-# 0-editor <target_file> <old_block> <new_block>
 0-run src/main.0 main.js diff_old.txt diff_new.txt
 ```
 
+**For Python Environments:**
+```bash
+chmod +x python/0_editor.py
+./python/0_editor.py main.js diff_old.txt diff_new.txt
+```
+
+**For Rust/Native Environments:**
+```bash
+cd rust && cargo build --release
+./target/release/0-editor main.js diff_old.txt diff_new.txt
+```
+
 > **Success: File modified intelligently via 0-editor AST/Fuzzy engine.**
+
+### OpenClaw Integration
+`0-editor` provides a first-class AgentSkill for [OpenClaw](https://github.com/openclaw/openclaw). 
+To make your OpenClaw agent natively use fuzzy editing instead of the fragile built-in `edit` tool, copy the skill:
+
+```bash
+mkdir -p ~/.openclaw/skills/0-editor
+cp openclaw-skill/SKILL.md ~/.openclaw/skills/0-editor/SKILL.md
+```
 
 No more counting brackets. No more regex parsing. Let your LLMs write code, and let `0-editor` handle the AST injection.
 
