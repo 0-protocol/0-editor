@@ -1,0 +1,17 @@
+// src/io.0
+import { std } from "core";
+import { fs } from "system";
+
+export fn read_file(path: String) -> String {
+    return fs.read_text(path);
+}
+
+export fn write_file(path: String, content: String) -> bool {
+    try {
+        fs.write_text(path, content);
+        return true;
+    } catch (e: Error) {
+        std.print("Failed to write to file: " + path);
+        return false;
+    }
+}

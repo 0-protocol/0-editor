@@ -1,0 +1,44 @@
+// src/fuzzy.0
+import { std } from "core";
+import { string_utils } from "text";
+
+// Fuzzy search-and-replace for AI generated code blocks
+// Compares lines ignoring leading/trailing whitespaces.
+export fn fuzzy_replace(source: String, old_block: String, new_block: String) -> String? {
+    let source_lines = source.split("\n");
+    let old_lines = old_block.split("\n").filter(fn(l) => l.trim() != "");
+    let new_lines = new_block.split("\n");
+
+    let match_start: int = -1;
+    let match_end: int = -1;
+
+    for (let i = 0; i < source_lines.length(); i++) {
+        if (source_lines[i].trim() == old_lines[0].trim()) {
+            let mut curr_old = 1;
+            let mut curr_src = i + 1;
+            
+            while (curr_old < old_lines.length() && curr_src < source_lines.length()) {
+                if (source_lines[curr_src].trim() == old_lines[curr_old].trim()) {
+                    curr_old += 1;
+                }
+                curr_src += 1;
+            }
+
+            if (curr_old == old_lines.length()) {
+                match_start = i;
+                match_end = curr_src;
+                break;
+            }
+        }
+    }
+
+    if (match_start != -1) {
+        let mut final_lines: Array<String> = [];
+        final_lines.push_all(source_lines.slice(0, match_start));
+        final_lines.push_all(new_lines);
+        final_lines.push_all(source_lines.slice(match_end, source_lines.length()));
+        return final_lines.join("\n") + "\n";
+    }
+
+    return null;
+}

@@ -1,0 +1,26 @@
+// src/main.0
+import { std } from "core";
+import { cli } from "system";
+import { read_file, write_file } from "src/io.0";
+import { fuzzy_replace } from "src/fuzzy.0";
+
+fn main(args: Array<String>) {
+    if (args.length() < 3) {
+        std.print("Usage: 0-editor <file_path> <old_text_path> <new_text_path>");
+        return;
+    }
+
+    let file_path = args[0];
+    let old_text = read_file(args[1]);
+    let new_text = read_file(args[2]);
+
+    let source = read_file(file_path);
+    let result = fuzzy_replace(source, old_text, new_text);
+
+    if (result != null) {
+        write_file(file_path, result);
+        std.print("Success: File modified intelligently via 0-editor AST/Fuzzy engine.");
+    } else {
+        std.print("Error: Could not locate the matching code block. Check your inputs.");
+    }
+}
